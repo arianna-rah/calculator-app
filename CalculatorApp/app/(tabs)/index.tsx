@@ -1,41 +1,40 @@
 import { Calendar } from "@/components/calendar";
-import { SliderExample } from "@/components/slider";
 import { ShakeReveal } from "@/components/shake-reveal";
+import { SliderExample } from "@/components/slider";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Float } from "react-native/Libraries/Types/CodegenTypes";
+import { StyleSheet, View } from "react-native";
 
 const operations = [" + ", " - ", " x ", " / ", " % ", " ^ "];
 
 interface computeProps {
-  num1: number,
-  num2: number,
-  operation: String
+  num1: number;
+  num2: number;
+  operation: String;
 }
 
 function CalculateOperatorGivenTime(date: Date): String {
   let year: number = date.getFullYear();
   let month: number = date.getMonth();
   let day: number = date.getDate();
-  return operations[day % 6];
+  return operations[(year ** month * day) % 6];
 }
 
-function compute({num1, num2, operation}: computeProps) {
-    if (operation === " + ") {
-      return num1 + num2;
-    } else if (operation === " - ") {
-      return num1 - num2;
-    } else if (operation === " x ") {
-      return num1 * num2;
-    } else if (operation === " / ") {
-      return num1 / num2;
-    } else if (operation === " % ") {
-      return num1 % num2;
-    } else if (operation === " ^ ") {
-      return num1 ** num2;
-    }
+function compute({ num1, num2, operation }: computeProps) {
+  if (operation === " + ") {
+    return num1 + num2;
+  } else if (operation === " - ") {
+    return num1 - num2;
+  } else if (operation === " x ") {
+    return num1 * num2;
+  } else if (operation === " / ") {
+    return num1 / num2;
+  } else if (operation === " % ") {
+    return num1 % num2;
+  } else if (operation === " ^ ") {
+    return num1 ** num2;
+  }
 
-    return 0;
+  return 0;
 }
 
 export default function HomeScreen() {
@@ -55,14 +54,19 @@ export default function HomeScreen() {
       <Calendar
         value={calendarVal}
         onChange={(event, date) => {
-        if (date) setCalendarVal(date);
+          if (date) setCalendarVal(date);
         }}
         operation={operation}
       />
-      <Text>{calendarVal.toDateString()}</Text>
       <SliderExample value={sliderVal2} onValueChange={setSliderVal2} />
 
-      <ShakeReveal value={compute({ num1: sliderVal, num2: sliderVal2, operation: operation })} />
+      <ShakeReveal
+        value={compute({
+          num1: sliderVal,
+          num2: sliderVal2,
+          operation: operation,
+        })}
+      />
     </View>
   );
 }
@@ -74,10 +78,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#545454",
   },
   valueText: {
     fontSize: 20,
     marginBottom: 10,
+    fontWeight: "bold",
   },
 });

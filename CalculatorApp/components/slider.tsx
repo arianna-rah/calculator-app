@@ -31,10 +31,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#3f3f75",
+    marginTop: 16,
+    paddingVertical: 8,
+    borderWidth: 4,
+    borderRadius: 6,
   },
   valueText: {
     fontSize: 20,
     marginBottom: 10,
+    fontWeight: "bold",
+    color: "#FFFFFF",
   },
 });

@@ -1,4 +1,6 @@
-import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
 import { Alert, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -31,11 +33,7 @@ export function Calendar({ value, onChange, operation }: DatePickerProps) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <DateTimePicker
-                mode={"date"}
-                value={value}
-                onChange={onChange}
-              />
+              <DateTimePicker mode={"date"} value={value} onChange={onChange} />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -59,14 +57,10 @@ export function Calendar({ value, onChange, operation }: DatePickerProps) {
 const styles = StyleSheet.create({
   calendar: {
     flex: 1,
-    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#ecf0f1",
-    //today: { borderColor: "blue", borderWidth: 1 },
-    //selected: { backgroundColor: "blue" },
-    //selected_label: { color: "white" },
+    backgroundColor: "#202020",
   },
   centeredView: {
     flex: 1,
@@ -75,9 +69,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    backgroundColor: "#202020",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -89,23 +81,24 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    padding: 50,
+    borderWidth: 4,
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#f5c842",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#3f3f75",
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontSize: 50,
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    fontWeight: "bold",
   },
 });
