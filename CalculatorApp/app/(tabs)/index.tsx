@@ -1,14 +1,41 @@
 import { Calendar } from "@/components/calendar";
 import { SliderExample } from "@/components/slider";
+import { ShakeReveal } from "@/components/shake-reveal";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
-const operations = ["  +  ", "  -  ", "  x  ", "  /  ", "  %  ", "  ^  "];
+const operations = [" + ", " - ", " x ", " / ", " % ", " ^ "];
+
+interface computeProps {
+  num1: number,
+  num2: number,
+  operation: String
+}
+
 function CalculateOperatorGivenTime(date: Date): String {
   let year: number = date.getFullYear();
   let month: number = date.getMonth();
   let day: number = date.getDate();
   return operations[day % 6];
+}
+
+function compute({num1, num2, operation}: computeProps) {
+    if (operation === " + ") {
+      return num1 + num2;
+    } else if (operation === " - ") {
+      return num1 - num2;
+    } else if (operation === " x ") {
+      return num1 * num2;
+    } else if (operation === " / ") {
+      return num1 / num2;
+    } else if (operation === " % ") {
+      return num1 % num2;
+    } else if (operation === " ^ ") {
+      return num1 ** num2;
+    }
+
+    return 0;
 }
 
 export default function HomeScreen() {
@@ -27,11 +54,15 @@ export default function HomeScreen() {
       <SliderExample value={sliderVal} onValueChange={setSliderVal} />
       <Calendar
         value={calendarVal}
-        onValueChange={setCalendarVal}
+        onChange={(event, date) => {
+        if (date) setCalendarVal(date);
+        }}
         operation={operation}
       />
       <Text>{calendarVal.toDateString()}</Text>
       <SliderExample value={sliderVal2} onValueChange={setSliderVal2} />
+
+      <ShakeReveal value={compute({ num1: sliderVal, num2: sliderVal2, operation: operation })} />
     </View>
   );
 }

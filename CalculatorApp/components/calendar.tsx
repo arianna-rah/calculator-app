@@ -1,15 +1,15 @@
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { useEffect, useState } from "react";
 import { Alert, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 interface DatePickerProps {
   value: Date;
-  onValueChange: (val: Date) => void;
-  operation: string;
+  onChange: (event: DateTimePickerEvent, date?: Date) => void;
+  operation: String;
 }
 
-export function Calendar({ value, onValueChange, operation }: DatePickerProps) {
+export function Calendar({ value, onChange, operation }: DatePickerProps) {
   let today = new Date();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(value);
@@ -34,7 +34,7 @@ export function Calendar({ value, onValueChange, operation }: DatePickerProps) {
               <DateTimePicker
                 mode={"date"}
                 value={value}
-                onValueChange={onValueChange}
+                onChange={onChange}
               />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
