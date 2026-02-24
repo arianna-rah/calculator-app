@@ -33,7 +33,12 @@ export function Calendar({ value, onChange, operation }: DatePickerProps) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <DateTimePicker mode={"date"} value={value} onChange={onChange} />
+              <DateTimePicker
+                mode={"date"}
+                value={value}
+                onChange={onChange}
+                textColor="white"
+              />
               <Pressable
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "#202020",
+    backgroundColor: "#3f3f75",
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5c842",
   },
   buttonClose: {
-    backgroundColor: "#3f3f75",
+    backgroundColor: "#202020",
   },
   textStyle: {
     color: "white",
